@@ -37,7 +37,9 @@ function App() {
     }
 
     // handle the case that all has been selected.
-    updatedList.some(({ isSelected }) => isSelected === false)
+    updatedList.some(
+      ({ isAvailable, isSelected }) => isAvailable && isSelected === false
+    )
       ? setIsAllSelected(false)
       : setIsAllSelected(true);
 
