@@ -1,4 +1,5 @@
 import "./App.css";
+import mockData from "./mockData";
 
 function App() {
   const renderHeader = () => {
@@ -8,37 +9,24 @@ function App() {
           <input type="checkbox" />
         </th>
         <th></th>
-        <th>狀態</th>
+        <th class="statusCol">狀態</th>
       </tr>
     );
   };
   const renderBody = () => {
     return (
       <tbody>
-        <tr>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td></td>
-          <td>00-未派車</td>
-        </tr>
-        <tr>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td></td>
-          <td>00-未派車</td>
-        </tr>
-        <tr>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td></td>
-          <td>00-未派車</td>
-        </tr>
+        {mockData.map(({ id, status, isAvailable }) => (
+          <tr key={id}>
+            <td>{isAvailable && <input type="checkbox" />}</td>
+            <td></td>
+            <td>{status}</td>
+          </tr>
+        ))}
       </tbody>
     );
   };
+
   return (
     <div className="App">
       <h1 className="title">Checkboxes List</h1>
