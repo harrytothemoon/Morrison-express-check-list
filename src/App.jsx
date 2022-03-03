@@ -4,6 +4,7 @@ import mockData from "./mockData";
 import "./App.css";
 
 function App() {
+  const [lastCheckIndex, setLastCheckIndex] = useState(null);
   const [isAllSelected, setIsAllSelected] = useState(false);
   const [list, setList] = useState([]);
 
@@ -18,13 +19,29 @@ function App() {
     setIsAllSelected(!isAllSelected);
   };
 
-  const handleSelect = (index) => () => {
-    const updatedList = [...list];
+  const handleSelect = (index) => (event) => {
+    let updatedList = [...list];
+    const isShiftKeyDown = event.nativeEvent.shiftKey;
+    const [start, end] =
+      index > lastCheckIndex
+        ? [lastCheckIndex, index]
+        : [index, lastCheckIndex];
+
     updatedList[index].isSelected = !updatedList[index].isSelected;
+
+    if (isShiftKeyDown) {
+      updatedList.forEach((item, index) => {
+        if (index > start && index < end) item.isSelected = true;
+      });
+    }
 
     updatedList.some(({ isSelected }) => isSelected === false)
       ? setIsAllSelected(false)
       : setIsAllSelected(true);
+
+    if (event.target.checked) {
+      setLastCheckIndex(index);
+    }
 
     setList(updatedList);
   };
