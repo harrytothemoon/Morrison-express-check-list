@@ -4,11 +4,28 @@ import mockData from "./mockData";
 import "./App.css";
 
 function App() {
+  const [isAllSelected, setIsAllSelected] = useState(false);
   const [list, setList] = useState([]);
+
+  const handleAllSelected = () => {
+    const updatedList = [...list];
+    setList(
+      updatedList.map(({ isSelected, ...rest }) => ({
+        ...rest,
+        isSelected: !isAllSelected,
+      }))
+    );
+    setIsAllSelected(!isAllSelected);
+  };
 
   const handleSelect = (index) => () => {
     const updatedList = [...list];
     updatedList[index].isSelected = !updatedList[index].isSelected;
+
+    updatedList.some(({ isSelected }) => isSelected === false)
+      ? setIsAllSelected(false)
+      : setIsAllSelected(true);
+
     setList(updatedList);
   };
 
@@ -16,7 +33,11 @@ function App() {
     return (
       <tr>
         <th className="checkboxCol">
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            onChange={handleAllSelected}
+            checked={isAllSelected}
+          />
         </th>
         <th></th>
         <th className="statusCol">狀態</th>
