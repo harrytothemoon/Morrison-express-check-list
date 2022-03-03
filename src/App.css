@@ -1,3 +1,37 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 40%;
+}
+
+th,
+td {
+  border: 1px solid #f9f9f9;
+}
+
+th {
+  background-color: #c9dff2;
+  color: #2c5a7b;
+  text-align: start;
+  padding: 0.5rem;
+}
+
+tr:nth-child(odd) {
+  background-color: #f3f9fc;
+}
+
+td {
+  color: #a4a4a4;
+}
+
+.checkboxCol {
+  width: 5%;
   text-align: center;
 }
