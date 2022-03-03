@@ -1,24 +1,44 @@
-import "./App.css";
+import React, { useEffect, useState } from "react";
 import mockData from "./mockData";
 
+import "./App.css";
+
 function App() {
+  const [list, setList] = useState([]);
+
+  const handleSelect = (index) => () => {
+    const updatedList = [...list];
+    updatedList[index].isSelected = !updatedList[index].isSelected;
+    setList(updatedList);
+  };
+
   const renderHeader = () => {
     return (
       <tr>
-        <th class="checkboxCol">
+        <th className="checkboxCol">
           <input type="checkbox" />
         </th>
         <th></th>
-        <th class="statusCol">狀態</th>
+        <th className="statusCol">狀態</th>
       </tr>
     );
   };
+
   const renderBody = () => {
     return (
       <tbody>
-        {mockData.map(({ id, status, isAvailable }) => (
+        {list.map(({ id, status, isAvailable, isSelected }, index) => (
           <tr key={id}>
-            <td>{isAvailable && <input type="checkbox" />}</td>
+            <td>
+              {isAvailable && (
+                <input
+                  id={id}
+                  onChange={handleSelect(index)}
+                  checked={isSelected}
+                  type="checkbox"
+                />
+              )}
+            </td>
             <td></td>
             <td>{status}</td>
           </tr>
@@ -26,6 +46,14 @@ function App() {
       </tbody>
     );
   };
+
+  useEffect(() => {
+    const parseData = mockData.map((data) => ({
+      ...data,
+      isSelected: false, //init the state
+    }));
+    setList(parseData);
+  }, []);
 
   return (
     <div className="App">
