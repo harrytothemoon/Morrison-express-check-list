@@ -20,7 +20,7 @@ function App() {
   };
 
   const handleSelect = (index) => (event) => {
-    let updatedList = [...list];
+    const updatedList = [...list];
     const isShiftKeyDown = event.nativeEvent.shiftKey;
     const [start, end] =
       index > lastCheckIndex
@@ -29,12 +29,14 @@ function App() {
 
     updatedList[index].isSelected = !updatedList[index].isSelected;
 
+    // handling multiple selections at once with the shift key.
     if (isShiftKeyDown) {
       updatedList.forEach((item, index) => {
         if (index > start && index < end) item.isSelected = true;
       });
     }
 
+    // handle the case that all has been selected.
     updatedList.some(({ isSelected }) => isSelected === false)
       ? setIsAllSelected(false)
       : setIsAllSelected(true);
