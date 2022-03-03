@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Morrison-express-check-list/static/css/main.fd7c82cc.css",
+    "main.js": "/Morrison-express-check-list/static/js/main.56ccbd58.js",
+    "index.html": "/Morrison-express-check-list/index.html",
+    "main.fd7c82cc.css.map": "/Morrison-express-check-list/static/css/main.fd7c82cc.css.map",
+    "main.56ccbd58.js.map": "/Morrison-express-check-list/static/js/main.56ccbd58.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fd7c82cc.css",
+    "static/js/main.56ccbd58.js"
+  ]
+}
